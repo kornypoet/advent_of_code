@@ -7,43 +7,28 @@ import (
 	"github.com/kornypoet/advent_of_code/util"
 )
 
-type Move int
-
-const (
-	Rock     Move = 1
-	Paper         = 2
-	Scissors      = 3
-)
-
-type GameResult int
-
-const (
-	Loss GameResult = 0
-	Draw            = 3
-	Win             = 6
-)
-
-var choiceValues = map[string]Move{
-	"X": Rock,
-	"Y": Paper,
-	"Z": Scissors,
-}
+var rock = 1
+var paper = 2
+var scissors = 3
+var loss = 0
+var draw = 3
+var win = 6
 
 var gameOutcomes = map[string]map[string]int{
 	"A": { // rock
-		"X": 3 + 0, // lose
-		"Y": 1 + 3, // draw
-		"Z": 2 + 6, // win
+		"X": scissors + loss,
+		"Y": rock + draw,
+		"Z": paper + win,
 	},
 	"B": { // paper
-		"X": 1 + 0, // lose
-		"Y": 2 + 3, // draw
-		"Z": 3 + 6, // win
+		"X": rock + loss,
+		"Y": paper + draw,
+		"Z": scissors + win,
 	},
 	"C": { // scissors
-		"X": 2 + 0, // lose
-		"Y": 3 + 3, // draw
-		"Z": 1 + 6, // win
+		"X": paper + loss,
+		"Y": scissors + draw,
+		"Z": rock + win,
 	},
 }
 
@@ -54,7 +39,6 @@ func Day2() {
 		choices := strings.Fields(line)
 		opponent := choices[0]
 		player := choices[1]
-		// score += choiceValues[player]
 		score += gameOutcomes[opponent][player]
 	})
 
