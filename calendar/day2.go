@@ -8,13 +8,15 @@ import (
 )
 
 type Move int
+
 const (
-	Rock Move = 1
-	Paper     = 2
-	Scissors  = 3
+	Rock     Move = 1
+	Paper         = 2
+	Scissors      = 3
 )
 
 type GameResult int
+
 const (
 	Loss GameResult = 0
 	Draw            = 3

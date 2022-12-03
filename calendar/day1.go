@@ -22,7 +22,7 @@ func Day1() {
 	total := 0
 	largest := []int{0, 0, 0}
 
-	util.ProcessByLine("input/day1.txt", func(line string){
+	util.ProcessByLine("input/day1.txt", func(line string) {
 		if line != "" {
 			calories, _ := strconv.Atoi(line)
 			total += calories
