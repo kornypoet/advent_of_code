@@ -35,7 +35,7 @@ var gameOutcomes = map[string]map[string]int{
 func Day2() {
 	score := 0
 
-	util.ProcessByLine("input/day2.txt", func(line string) {
+	util.ProcessByLine("input/day2.txt", func(line string, num int) {
 		choices := strings.Fields(line)
 		opponent := choices[0]
 		player := choices[1]
