@@ -1,6 +1,7 @@
 package calendar
 
 import (
+	"io"
 	"log"
 	"strings"
 
@@ -14,7 +15,25 @@ var loss = 0
 var draw = 3
 var win = 6
 
-var gameOutcomes = map[string]map[string]int{
+var strategy1 = map[string]map[string]int{
+	"A": { // rock
+		"X": rock + draw,
+		"Y": paper + win,
+		"Z": scissors + loss,
+	},
+	"B": { // paper
+		"X": rock + loss,
+		"Y": paper + draw,
+		"Z": scissors + win,
+	},
+	"C": { // scissors
+		"X": rock + win,
+		"Y": paper + loss,
+		"Z": scissors + draw,
+	},
+}
+
+var strategy2 = map[string]map[string]int{
 	"A": { // rock
 		"X": scissors + loss,
 		"Y": rock + draw,
@@ -32,15 +51,21 @@ var gameOutcomes = map[string]map[string]int{
 	},
 }
 
-func Day2() {
+func Day2(input io.Reader, part int) int {
 	score := 0
-
-	util.ProcessByLine("input/day2.txt", func(line string, num int) {
+	var strategy map[string]map[string]int
+	if part == 1 {
+		strategy = strategy1
+	} else {
+		strategy = strategy2
+	}
+	util.ProcessByLine(input, func(line string, num int) {
 		choices := strings.Fields(line)
 		opponent := choices[0]
 		player := choices[1]
-		score += gameOutcomes[opponent][player]
+		score += strategy[opponent][player]
 	})
 
 	log.Printf("Total of game scores: %d", score)
+	return score
 }

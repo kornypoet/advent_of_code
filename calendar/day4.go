@@ -1,6 +1,7 @@
 package calendar
 
 import (
+	"io"
 	"log"
 	"strconv"
 	"strings"
@@ -8,10 +9,9 @@ import (
 	"github.com/kornypoet/advent_of_code/util"
 )
 
-func Day4() {
+func Day4(input io.Reader, part int) int {
 	total := 0
-	util.ProcessByLine("input/day4.txt", func(line string, num int) {
-		log.Printf("line: %s num: %d", line, num)
+	util.ProcessByLine(input, func(line string, num int) {
 		sectionPairs := make([][]string, 0)
 		assignments := strings.Split(line, ",")
 		for _, asst := range assignments {
@@ -23,13 +23,24 @@ func Day4() {
 		sTwoFirst, _ := strconv.Atoi(sectionPairs[1][0])
 		sTwoSecond, _ := strconv.Atoi(sectionPairs[1][1])
 
-		if sOneFirst <= sTwoFirst && sOneSecond >= sTwoFirst { // 1-5 2-7
-			log.Printf("The first section overlaps the second: %v %v", sectionPairs[0], sectionPairs[1])
-			total++
-		} else if sTwoFirst <= sOneFirst && sTwoSecond >= sOneFirst { // 2-7 1-5
-			log.Printf("The first section overlaps the second: %v %v", sectionPairs[0], sectionPairs[1])
-			total++
+		if part == 1 {
+			if sOneFirst <= sTwoFirst && sOneSecond >= sTwoSecond {
+				log.Printf("The first section overlaps the second: %v %v", sectionPairs[0], sectionPairs[1])
+				total++
+			} else if sTwoFirst <= sOneFirst && sTwoSecond >= sOneSecond {
+				log.Printf("The second section overlaps the first: %v %v", sectionPairs[0], sectionPairs[1])
+				total++
+			}
+		} else {
+			if sOneFirst <= sTwoFirst && sOneSecond >= sTwoFirst {
+				log.Printf("The first section overlaps the second: %v %v", sectionPairs[0], sectionPairs[1])
+				total++
+			} else if sTwoFirst <= sOneFirst && sTwoSecond >= sOneFirst {
+				log.Printf("The second section overlaps the first: %v %v", sectionPairs[0], sectionPairs[1])
+				total++
+			}
 		}
 	})
 	log.Printf("Total overlaps: %d", total)
+	return total
 }

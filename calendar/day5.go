@@ -1,6 +1,7 @@
 package calendar
 
 import (
+	"io"
 	"log"
 	"regexp"
 	"strconv"
@@ -8,7 +9,7 @@ import (
 	"github.com/kornypoet/advent_of_code/util"
 )
 
-/*
+/* FIXME: parse input not hardcode
 	[C] [B] [H]
 [W]     [D] [J] [Q] [B]
 [P] [F] [Z] [F] [B] [L]
@@ -43,34 +44,47 @@ func cut(stack *[]string, amount int) (val []string) {
 	return
 }
 
-func Day5() {
-	util.ProcessByLine("input/day5.txt", func(line string, num int) {
+func Day5(input io.Reader, part int, stack map[string][]string) string {
+	// FIXME: ugly copy
+	if len(stack) == 0 {
+		stack = make(map[string][]string)
+		for k, v := range stacks {
+			cp := make([]string, len(v))
+			copy(cp, v)
+			stack[k] = cp
+		}
+	}
+	log.Print(stack)
+	util.ProcessByLine(input, func(line string, num int) {
 		r := regexp.MustCompile(`move (?P<Count>\d+) from (?P<Source>\d+) to (?P<Dest>\d+)`)
 		directions := r.FindStringSubmatch(line)
 		if len(directions) != 0 {
 			count, _ := strconv.Atoi(directions[1])
 			source := directions[2]
 			dest := directions[3]
-			src := stacks["stack"+source]
-			dst := stacks["stack"+dest]
+			src := stack["stack"+source]
+			dst := stack["stack"+dest]
 			log.Printf("moving from %v to %v %d times", src, dst, count)
-			// for i := 1; i <= count; i++ {
-			// 	val := pop(&src)
-			// 	dst = append(dst, val)
-			// }
-			val := cut(&src, count)
-			dst = append(dst, val...)
-			stacks["stack"+source] = src
-			stacks["stack"+dest] = dst
-			log.Print(stacks)
+			if part == 1 {
+				for i := 1; i <= count; i++ {
+					val := pop(&src)
+					dst = append(dst, val)
+				}
+			} else {
+				val := cut(&src, count)
+				dst = append(dst, val...)
+			}
+			stack["stack"+source] = src
+			stack["stack"+dest] = dst
 		}
 	})
 
 	code := ""
-	for i := '1'; i <= '9'; i++ {
-		stack := stacks["stack"+string(i)]
-		code += stack[len(stack)-1]
+	for i := 1; i <= len(stack); i++ {
+		st := stack["stack"+strconv.Itoa(i)]
+		code += st[len(st)-1]
 	}
 
 	log.Printf("the final code: %s", code)
+	return code
 }
