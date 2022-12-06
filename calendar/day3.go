@@ -29,7 +29,7 @@ func Day3(input io.Reader, part int) int {
 		util.ProcessByLine(input, func(line string, num int) {
 			duplicates := make(map[rune]bool)
 			for i, char := range line {
-				if i < len(line) / 2 { // compartment one
+				if i < len(line)/2 { // compartment one
 					duplicates[char] = true
 				} else { // compartment two
 					if duplicates[char] {
@@ -53,7 +53,7 @@ func Day3(input io.Reader, part int) int {
 				} else if groupMember == 2 {
 					if duplicates[char] == 1 {
 						duplicates[char] = 2
-						
+
 					}
 				} else if groupMember == 0 {
 					if duplicates[char] == 2 {

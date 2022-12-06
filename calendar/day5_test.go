@@ -12,7 +12,7 @@ move 2 from 2 to 1
 move 1 from 1 to 2
 `
 
-func TestDay5(t *testing.T) {	
+func TestDay5(t *testing.T) {
 	cases := []struct {
 		input    io.Reader
 		part     int
@@ -23,7 +23,7 @@ func TestDay5(t *testing.T) {
 			input:    strings.NewReader(input5),
 			part:     1,
 			expected: "CMZ",
-			stacks:   map[string][]string{
+			stacks: map[string][]string{
 				"stack1": []string{"Z", "N"},
 				"stack2": []string{"M", "C", "D"},
 				"stack3": []string{"P"},
@@ -33,11 +33,11 @@ func TestDay5(t *testing.T) {
 			input:    strings.NewReader(input5),
 			part:     2,
 			expected: "MCD",
-			stacks:   map[string][]string{
+			stacks: map[string][]string{
 				"stack1": []string{"Z", "N"},
 				"stack2": []string{"M", "C", "D"},
 				"stack3": []string{"P"},
-			},			
+			},
 		},
 	}
 
