@@ -32,8 +32,8 @@ func main() {
 	// calendar.Day6(util.InputFromFile("input/day6.txt"), 1)
 	// log.Print("Day 6 part 2")
 	// calendar.Day6(util.InputFromFile("input/day6.txt"), 2)
-	log.Print("Day 7 part 1")
-	calendar.Day7(util.InputFromFile("input/day7.txt"), 1)
-	// log.Print("Day 7 part 2")
-	// calendar.Day7(util.InputFromFile("input/day7.txt"), 2)
+	// log.Print("Day 7 part 1")
+	// calendar.Day7(util.InputFromFile("input/day7.txt"), 1)
+	log.Print("Day 7 part 2")
+	calendar.Day7(util.InputFromFile("input/day7.txt"), 2)
 }
