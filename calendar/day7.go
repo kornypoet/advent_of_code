@@ -41,7 +41,7 @@ func (ft *FileTree) display() {
 func (n *Node) display(indent int, prefix string) {
 	log.Printf("%s%s%s %d", strings.Repeat(" ", indent), prefix, n.location, n.size())
 	for _, ch := range n.children {
-		ch.display(indent + 2, prefix + n.location + "/")
+		ch.display(indent+2, prefix+n.location+"/")
 	}
 	for _, f := range n.files {
 		f.display(indent + 2)
@@ -133,7 +133,7 @@ func Day7(input io.Reader, part int) int {
 				default:
 					filesize, _ := strconv.Atoi(contents[1])
 					filename := contents[2]
-					tree.current.addFile(&File{ size: filesize, name: filename})
+					tree.current.addFile(&File{size: filesize, name: filename})
 				}
 			}
 		}

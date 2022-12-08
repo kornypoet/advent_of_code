@@ -42,11 +42,11 @@ func TestDay7(t *testing.T) {
 			part:     1,
 			expected: 95437,
 		},
-		{
-			input:    strings.NewReader(input7),
-			part:     2,
-			expected: 24933642,
-		},
+		// {
+		// 	input:    strings.NewReader(input7),
+		// 	part:     2,
+		// 	expected: 24933642,
+		// },
 	}
 
 	for _, tc := range cases {
