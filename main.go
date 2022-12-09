@@ -40,4 +40,8 @@ func main() {
 	// calendar.Day8(util.InputFromFile("input/day8.txt"), 1)
 	// log.Print("Day 8 part 2")
 	// calendar.Day8(util.InputFromFile("input/day8.txt"), 2)
+	// log.Print("Day 9 part 1")
+	// calendar.Day9(util.InputFromFile("input/day9.txt"), 1)
+	log.Print("Day 9 part 2")
+	calendar.Day9(util.InputFromFile("input/day9.txt"), 2)
 }
