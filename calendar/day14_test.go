@@ -6,7 +6,9 @@ import (
 	"testing"
 )
 
-var input14 string = ``
+var input14 string = `498,4 -> 498,6 -> 496,6
+503,4 -> 502,4 -> 502,9 -> 494,9
+`
 
 func TestDay14(t *testing.T) {
 	cases := []struct {
@@ -17,12 +19,12 @@ func TestDay14(t *testing.T) {
 		{
 			input:    strings.NewReader(input14),
 			part:     1,
-			expected: 1,
+			expected: 24,
 		},
 		{
 			input:    strings.NewReader(input14),
 			part:     2,
-			expected: 2,
+			expected: 93,
 		},
 	}
 
